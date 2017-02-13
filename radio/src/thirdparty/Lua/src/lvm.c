@@ -126,7 +126,7 @@ void luaV_gettable (lua_State *L, const TValue *t, TValue *key, StkId val) {
       // TRACE("luaV_gettable(key=%s)", keyname);
       luaR_result res = luaR_findentry(rvalue(t), keyname, &keytype);
       if (keytype == LUA_TLIGHTFUNCTION)
-        setlfvalue(val, (void*)(size_t)res)
+        setlfvalue(val, (void*)*((size_t *)&res))
       else if (keytype == LUA_TNUMBER)
         setnvalue(val, (lua_Number)res)
     }
@@ -634,7 +634,7 @@ void luaV_execute (lua_State *L) {
             setrvalue(ra, (void*)(size_t)res)
           }
           else if (keytype == LUA_TLIGHTFUNCTION)
-            setlfvalue(ra, (void*)(size_t)res)
+            setlfvalue(ra, (void*)*((size_t *)&res))
           else if (keytype == LUA_TNUMBER)
             setnvalue(ra, (lua_Number)res)
           else
