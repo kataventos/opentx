@@ -90,6 +90,7 @@ class ModulePanel : public ModelPanel
     void on_multiSubType_currentIndexChanged(int index);
     void on_autoBind_stateChanged(int state);
     void on_lowPower_stateChanged(int state);
+    void on_optionValue_editingFinished();
 
   private:
     ModuleData & module;
