@@ -7,7 +7,7 @@
 #include "llimits.h"
 #include "lauxlib.h"
 
-typedef lua_Number luaR_result;
+typedef size_t luaR_result;
 
 // A number entry in the read only table
 typedef struct

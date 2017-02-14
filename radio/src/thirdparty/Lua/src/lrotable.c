@@ -23,13 +23,7 @@ static luaR_result luaR_findkey(const void *where, const char *key, int type, in
       break;
     if (!strcmp(pname, key)) {
       *found = 1;
-      if (isfunction) {
-        luaR_result * result = (luaR_result *)&pf->func;
-        return *result;
-      }
-      else {
-        return pv->value;
-      }
+      return isfunction ? (luaR_result)pf->func : *((luaR_result *)&pv->value);
     }
     pf ++; pv ++;
   }
@@ -63,7 +57,7 @@ int luaR_findfunction(lua_State *L, const luaL_Reg *ptable) {
   const char *key = luaL_checkstring(L, 2);
   luaR_result res = luaR_findkey(ptable, key, LUAR_FINDFUNCTION, &found);
   if (found)
-    lua_pushlightfunction(L, (void *)*((size_t *)&res));
+    lua_pushlightfunction(L, (void *)res);
   else
     lua_pushnil(L);
   return 1;

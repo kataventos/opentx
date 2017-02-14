@@ -627,7 +627,7 @@ LUA_API void lua_getglobal (lua_State *L, const char *var) {
   luaR_result res = luaR_findglobal(var, &keytype);
   if (res != 0) {
     setsvalue2s(L, L->top++, luaS_new(L, var));
-    setlfvalue(L->top - 1, (void*)*((size_t *)&res))
+    setlfvalue(L->top - 1, (void*)res)
   }
   else {
     gt = luaH_getint(reg, LUA_RIDX_GLOBALS);
