@@ -128,7 +128,7 @@ void luaV_gettable (lua_State *L, const TValue *t, TValue *key, StkId val) {
       if (keytype == LUA_TLIGHTFUNCTION)
         setlfvalue(val, (void*)res)
       else if (keytype == LUA_TNUMBER)
-        setnvalue(val, *((lua_Number*)&res))
+        setnvalue(val, *((lua_Number *)&res))
     }
     return;
   }
@@ -635,7 +635,7 @@ void luaV_execute (lua_State *L) {
           else if (keytype == LUA_TLIGHTFUNCTION)
             setlfvalue(ra, (void*)res)
           else if (keytype == LUA_TNUMBER)
-            setnvalue(ra, (lua_Number)res)
+            setnvalue(ra, *((lua_Number *)&res))
           else
             Protect(luaV_gettable(L, cl->upvals[b]->v, RKC(i), ra));
         }
